@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {  ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { useMode } from "./theme";
 import { ColorModeContext } from "./theme";

@@ -37,7 +37,8 @@ export default function Navbar({ onClose, sideWidth }: INavbarProps) {
         alignItems: "center",
         pr: 2,
         py: 1,
-        backgroundColor: theme.palette.mode === 'light' ? theme.palette.background.paper : ''
+        backgroundColor:
+          theme.palette.mode === "light" ? theme.palette.background.paper : "",
       }}
     >
       <IconButton
@@ -50,21 +51,8 @@ export default function Navbar({ onClose, sideWidth }: INavbarProps) {
         {sideWidth > 0 ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
       </IconButton>
 
-      {/* SEARCH AND NOTIFICATIONS */}
+      {/* NOTIFICATIONS */}
       <Stack direction="row" sx={{ marginLeft: "auto" }}>
-        <TextField
-          label="Search"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-          variant="outlined"
-          size="small"
-          sx={{ display: { xs: "none", sm: "block" } }}
-        />
         <IconButton
           sx={{
             marginLeft: "auto",

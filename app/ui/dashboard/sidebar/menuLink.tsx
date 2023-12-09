@@ -17,7 +17,6 @@ export interface IMenuLinkProps {
 export default function MenuLink({ item }: IMenuLinkProps) {
   const theme = useTheme();
   const [isHover,setIsHover] = React.useState(false)
-  const color = tokens(theme.palette.mode)
   const pathname = usePathname()
 
   return (

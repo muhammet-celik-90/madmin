@@ -14,12 +14,11 @@ import {
 import Header from "@/app/ui/dashboard/cardheader";
 import SubmitButton from "@/app/ui/dashboard/submitbutton";
 import { useFormState } from "react-dom";
-import { addUser } from "@/app/actions/adduser";
-import Snack, { ISnackProps } from "@/app/ui/dashboard/snack";
-import { SharedProps, useSnackbar } from "notistack";
+import Snack from "@/app/ui/dashboard/snack";
+import { addUser } from "@/app/actions/users/adduser";
+import UploadPhoto from "@/app/ui/dashboard/uploadphoto";
 
 export interface IAddUserProps {}
-type ImageProps = FileList | null;
 
 const initialState = {
   message: " ",
@@ -27,52 +26,34 @@ const initialState = {
 };
 
 export default function AddUser(props: IAddUserProps) {
-  const [image, setImage] = React.useState<ImageProps>();
   const [state, formAction] = useFormState(addUser, initialState);
-  const { enqueueSnackbar } = useSnackbar();
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let file = e.target.files;
-    setImage(file);
-  };
 
   return (
     <Card sx={{ px: 2, py: 1 }}>
-      {state.status && <Snack message={state.message} status={state.status} />}
+      {/* SNACK */}
+      <div style={{ display: "none" }}>
+        {state.status && (
+          <Snack message={state.message} status={state.status} />
+        )}
+      </div>
       <Header>Add User</Header>
       <form action={formAction}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
             <Paper elevation={2}>
-              <Box
-                component="label"
-                htmlFor="upload"
-                sx={{ "&:hover": { opacity: "0.6", cursor: "pointer" } }}
-              >
-                <Avatar
-                  src={
-                    image
-                      ? URL.createObjectURL(image?.[0])
-                      : "/images/avatar.png"
-                  }
-                  alt="avatar"
-                  variant="rounded"
-                  sx={{ width: "100%", height: "auto", maxHeight: "300px" }}
-                />
-                <input
-                  type="file"
-                  id="upload"
-                  name="upload"
-                  style={{ display: "none" }}
-                  onChange={handleImageChange}
-                />
-              </Box>
+              {/* IMAGE */}
+              <UploadPhoto />
             </Paper>
           </Grid>
           <Grid item xs={12} md={8}>
             <Paper elevation={2} sx={{ p: 2 }}>
               <Stack spacing={1}>
-                <TextField label="Username" name="username" required fullWidth />
+                <TextField
+                  label="Username"
+                  name="username"
+                  required
+                  fullWidth
+                />
                 <TextField label="Email" name="email" type="email" fullWidth />
                 <TextField
                   label="Password"

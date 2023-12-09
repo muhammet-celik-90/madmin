@@ -3,11 +3,12 @@
 import * as React from "react";
 import Sidebar from "../ui/dashboard/sidebar/sidebar";
 import Navbar from "../ui/dashboard/navbar/navbar";
-import { Grid, Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Grid, Stack, useMediaQuery, useTheme, IconButton } from "@mui/material";
 import Breadcrumb from "../ui/dashboard/breadcrumbs";
 import { usePathname } from "next/navigation";
 import Footer from "../ui/dashboard/footer";
-import { SnackbarProvider } from "notistack";
+import { SnackbarProvider, closeSnackbar } from "notistack";
+import CloseIcon from '@mui/icons-material/Close';
 
 export interface ILayoutProps {
   children?: React.ReactNode;
@@ -28,7 +29,15 @@ export default function Layout({ children }: ILayoutProps) {
   }, [isMobile]);
 
   return (
-    <SnackbarProvider autoHideDuration={3000} preventDuplicate={true}>
+    <SnackbarProvider
+      autoHideDuration={3000}
+      preventDuplicate={true}
+      action={(snackbarId) => (
+        <IconButton onClick={() => closeSnackbar(snackbarId)}>
+          <CloseIcon />
+        </IconButton>
+      )}
+    >
       <Grid container sx={{ width: "100%" }}>
         {/* SIDEBAR */}
         <Grid item sx={{ width: `${sidebarWidth}px` }}>

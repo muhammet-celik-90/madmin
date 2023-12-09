@@ -16,7 +16,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import CategoryIcon from "@mui/icons-material/Category";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import TimelineIcon from '@mui/icons-material/Timeline';
 import WorkIcon from "@mui/icons-material/Work";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
@@ -24,7 +24,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import MenuLink from "./menuLink";
 import { useRouter } from "next/navigation";
-import { tokens } from "@/app/theme";
+import PieChartIcon from '@mui/icons-material/PieChart';
 import LogoutIcon from "@mui/icons-material/Logout";
 
 export interface ISidebarProps {
@@ -51,30 +51,25 @@ export default function Sidebar({ onClose }: ISidebarProps) {
           path: "/dashboard/products",
           icon: <CategoryIcon />,
         },
-        {
-          title: "Transactions",
-          path: "/dashboard/transactions",
-          icon: <AccountBalanceWalletIcon />,
-        },
       ],
     },
     {
-      title: "Analytics",
+      title: "Charts",
       list: [
         {
-          title: "Revenue",
-          path: "/dashboard/revenue",
-          icon: <WorkIcon />,
-        },
-        {
-          title: "Reports",
-          path: "/dashboard/reports",
+          title: "Bars",
+          path: "/dashboard/bars",
           icon: <BarChartIcon />,
         },
         {
-          title: "Teams",
-          path: "/dashboard/teams",
-          icon: <Diversity3Icon />,
+          title: "Lines",
+          path: "/dashboard/lines",
+          icon: <TimelineIcon />,
+        },
+        {
+          title: "Pies",
+          path: "/dashboard/pies",
+          icon: <PieChartIcon />,
         },
       ],
     },
@@ -96,7 +91,6 @@ export default function Sidebar({ onClose }: ISidebarProps) {
   ];
   const theme = useTheme();
   const route = useRouter();
-  const color = tokens(theme.palette.mode);
 
   return (
     <Drawer

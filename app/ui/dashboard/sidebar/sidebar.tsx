@@ -74,19 +74,8 @@ export default function Sidebar({ onClose }: ISidebarProps) {
       ],
     },
     {
-      title: "User",
-      list: [
-        {
-          title: "Settings",
-          path: "/dashboard/settings",
-          icon: <SettingsIcon />,
-        },
-        {
-          title: "Help",
-          path: "/dashboard/help",
-          icon: <HelpOutlineIcon />,
-        },
-      ],
+      title: "Actions",
+      list: [],
     },
   ];
   const theme = useTheme();
@@ -178,7 +167,6 @@ export default function Sidebar({ onClose }: ISidebarProps) {
               </Box>
             ))}
         </Box>
-        <Divider />
         <Button
           sx={{
             textTransform: "capitalize",
@@ -195,7 +183,6 @@ export default function Sidebar({ onClose }: ISidebarProps) {
           <LogoutIcon sx={{ mr: 1 }} />
           Logout
         </Button>
-        <Divider />
       </Stack>
     </Drawer>
   );

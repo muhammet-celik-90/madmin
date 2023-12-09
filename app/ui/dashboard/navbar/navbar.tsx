@@ -1,31 +1,87 @@
 "use client";
 
 import * as React from "react";
-import {
-  Stack,
-  AppBar,
-  IconButton,
-  TextField,
-  InputAdornment,
-} from "@mui/material";
+import { Stack, AppBar, IconButton, Badge } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import PublicIcon from "@mui/icons-material/Public";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { ColorModeContext } from "@/app/theme";
 import { useTheme } from "@mui/material/styles";
+import NotificationsMain from "./notifications/main";
 
 export interface INavbarProps {
   onClose: any;
   sideWidth: number;
 }
 
+export interface Notifications {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  isRead: boolean;
+}
+
 export default function Navbar({ onClose, sideWidth }: INavbarProps) {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
+  const [openNotification, setOpenNotification] = React.useState(true);
+  const [notifications, setNotifications] = React.useState<Notifications[]>([
+    {
+      id: "1",
+      title: "New User",
+      description: "New User is registered",
+      date: "28 minutes ago",
+      isRead: false,
+    },
+    {
+      id: "2",
+      title: "Payment",
+      description: "New Payment is took",
+      date: "Yesterday",
+      isRead: false,
+    },
+    {
+      id: "3",
+      title: "Order is shipped",
+      description: "Your order is shipped",
+      date: "2 days ago",
+      isRead: true,
+    },
+    {
+      id: "4",
+      title: "New Message",
+      description: "You have new message",
+      date: "3 days ago",
+      isRead: true,
+    },
+    {
+      id: "5",
+      title: "New Email",
+      description: "You have new email",
+      date: "7 days ago",
+      isRead: false,
+    },
+  ]);
+
+  const handleClick = (arg: string) => {
+    const func = notifications.map((noti) => {
+      if (noti.id === arg) {
+        return {
+          ...noti,
+          isRead: true,
+        };
+      } else {
+        return noti;
+      }
+    });
+
+    setNotifications(func);
+  };
+
+  const unread = notifications.filter((item) => item.isRead === false);
   return (
     <AppBar
       position="static"
@@ -61,12 +117,23 @@ export default function Navbar({ onClose, sideWidth }: INavbarProps) {
         >
           {theme.palette.mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
-        <IconButton>
-          <NotificationsIcon />
+        <IconButton onClick={() => setOpenNotification(true)}>
+          <Badge
+            variant="dot"
+            color={unread.length > 0 ? 'error' : 'default'}
+          >
+            <NotificationsIcon />
+          </Badge>
         </IconButton>
-        <IconButton>
-          <PublicIcon />
-        </IconButton>
+        {/* NOTIFICATION DRAWER */}
+        {openNotification && (
+          <NotificationsMain
+            setOpenNotification={setOpenNotification}
+            notifications={notifications}
+            setNotifications={setNotifications}
+            handleClick={handleClick}
+          />
+        )}
       </Stack>
     </AppBar>
   );

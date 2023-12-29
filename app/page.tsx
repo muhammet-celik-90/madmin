@@ -1,12 +1,22 @@
-'use client'
+"use client";
 
-import { Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <>
-      <h1>Home</h1>
-      <Typography variant="h1">Home</Typography>
-    </>
-  )
+    <Box
+      sx={{
+        height: "100vh",
+        width: "100%",
+        justifyContent: "center",
+        display: "center",
+        alignItems: "center",
+      }}
+    >
+      <Link href="/dashboard">
+        <Typography variant="h1">Go to Dashboard</Typography>
+      </Link>
+    </Box>
+  );
 }

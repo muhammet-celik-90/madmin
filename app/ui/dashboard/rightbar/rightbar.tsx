@@ -7,7 +7,7 @@ export interface IRightbarProps {}
 export default function Rightbar(props: IRightbarProps) {
   return (
     <Stack spacing={2}>
-      {/* <Announcement /> */}
+      <Announcement />
     </Stack>
   );
 }
